@@ -74,5 +74,16 @@ def delete_prompt(request, prompt_id):
 
     return render(request, 'prompts/delete_prompt.html', {'prompt_to_delete':prompt_content})
 
+
+# This is the function used to show all prompt
+"""
+    Cette fonction a ete la plus facile a implementer, il siffut juste de recuperer les datas et de les stocke dans un dico afin 
+    de pouvoir les manipuler (afficher) dans le template html. C'est pas sorcier :)
+"""
 def show_all_prompt(request):
-    return HttpResponse('<h1>Here we\'ll show all prompt</h1>')
+    collection = db.prompts.find() # `collection` is all raw prompt data of the promptsdb database
+    # Getting all prompt and save it in a list of dict ---> [{'content': 'prompt content', 'user': 'own prompt username'},...]
+    all_prompts = [{'content' : doc['content'], 'user': doc['user']} for doc in collection]
+    # print(all_prompts)
+    # return HttpResponse('<h1>Here we\'ll show all prompt</h1>')
+    return render(request, 'prompts/show_all_prompt.html', {'prompts':all_prompts})

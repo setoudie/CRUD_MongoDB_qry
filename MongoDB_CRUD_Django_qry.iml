@@ -5,7 +5,7 @@
       <configuration>
         <option name="rootFolder" value="$MODULE_DIR$/MongoDB_CRUD_Django_qry" />
         <option name="settingsModule" value="settings.py" />
-        <option name="manageScript" value="manage.py" />
+        <option name="manageScript" value="" />
         <option name="environment" value="&lt;map/&gt;" />
         <option name="doNotUseTestRunner" value="false" />
         <option name="trackFilePattern" value="migrations" />
@@ -15,7 +15,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.11 (ETl_Banks_data)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (MongoDB_CRUD_Django_qry)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
