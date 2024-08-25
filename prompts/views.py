@@ -106,6 +106,8 @@ def update_prompt(request, prompt_id):
 
     if request.method == 'POST':
         data = request.POST
-
-
+        new_prompt_content = data.get('content')
+        # print(new_prompt_content)
+        prompts.update_one(id_of_prompt_to_update, {'$set': {'content': new_prompt_content}})
+        return redirect('create_prompt')
     return render(request, 'prompts/update_prompt.html', {'prompt':prompt_to_update})
