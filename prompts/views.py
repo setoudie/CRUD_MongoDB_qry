@@ -5,6 +5,7 @@
     U (Update) --> update_prompt(request, prompt_id) : On doit pouvoir modifier n'importe quel prompt en connaissant l'id
     D (Delete) --> delete_promt(request, prompt_id) : ```````````````` supprimer ```````````````````````````````````l'id
 """
+from http.client import ResponseNotReady
 
 from bson.objectid import ObjectId
 from django.http import HttpResponse
@@ -12,7 +13,7 @@ from django.shortcuts import render, redirect
 from pymongo import MongoClient
 # Create your views here.
 
-
+# Informations de connexion a la base de donnees
 # client = MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000')
 client = MongoClient("mongodb://localhost:27017/") # Connection a la DB Mongo
 db = client.promptsdb
@@ -49,7 +50,7 @@ def create_prompt(request):
     Dans cette fonction a partir de l'Id du prompt, on recupere les informations relatifs au prompt a supprimer.
     Une fois ces informations recuperees on cree un dict ou on les stockent. 
     Au niveau de mon template il y a un bouton supprimer (action "POST"), ce bouton supprime et redirige vers la page 
-    de c reation de prompt.
+    de creation de prompt.
 """
 def delete_prompt(request, prompt_id):
     # Trouver et vérifier si le prompt existe
@@ -87,3 +88,24 @@ def show_all_prompt(request):
     # print(all_prompts)
     # return HttpResponse('<h1>Here we\'ll show all prompt</h1>')
     return render(request, 'prompts/show_all_prompt.html', {'prompts':all_prompts})
+
+
+# This is the function used to update a prompt
+"""
+    
+"""
+def update_prompt(request, prompt_id):
+    id_of_prompt_to_update = {'_id': ObjectId(prompt_id)}
+    prompt_to_update = db.prompts.find_one(id_of_prompt_to_update)
+
+    prompt_to_update = {
+        'id': prompt_id,
+        'owner_username': prompt_to_update['user'],
+        'content': prompt_to_update['content']
+    }
+
+    if request.method == 'POST':
+        data = request.POST
+
+
+    return render(request, 'prompts/update_prompt.html', {'prompt':prompt_to_update})
